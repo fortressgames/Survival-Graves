@@ -1,0 +1,5 @@
+name: SurvivalGraves
+main: net.fortressgames.survivalgraves.SurvivalGraves
+version: 0.1
+api-version: 1.17
+author: FortressGames

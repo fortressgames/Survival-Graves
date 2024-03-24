@@ -18,8 +18,6 @@ public class PlayerDeathListener implements Listener {
 	public void death(PlayerDeathEvent e) {
 		Player player = e.getEntity();
 
-		System.out.println(player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType());
-
 		for(int y = 0; y < 384; y++) {
 			if(!new Location(player.getWorld(),
 					player.getLocation().getX(), (player.getLocation().getY() - 1) - y, player.getLocation().getZ())
@@ -29,8 +27,12 @@ public class PlayerDeathListener implements Listener {
 				GraveModule.getInstance().createGrave(
 						player.getUniqueId(),
 						new ArrayList<>(Arrays.asList(player.getInventory().getContents())),
-						e.getDroppedExp(),
-						new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() - y, player.getLocation().getZ()));
+						player.getLevel(),
+						new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() - y, player.getLocation().getZ()),
+						e.getDeathMessage().replace(player.getName() , ""));
+
+				e.getDrops().clear();
+				e.setDroppedExp(0);
 				break;
 			}
 		}
